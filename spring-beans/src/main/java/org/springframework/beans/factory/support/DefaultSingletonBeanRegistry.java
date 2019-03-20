@@ -189,7 +189,7 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
 		return singletonObject;
 	}
 
-	/**
+	/**AbstractBeanFactoryAbstractBeanFactoryAbstractBeanFactoryAbstractBeanFactory
 	 * Return the (raw) singleton object registered under the given name,
 	 * creating and registering a new one if none registered yet.
 	 * @param beanName the name of the bean
@@ -334,6 +334,7 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
 	 */
 	protected void beforeSingletonCreation(String beanName) {
 		if (!this.inCreationCheckExclusions.contains(beanName) && !this.singletonsCurrentlyInCreation.add(beanName)) {
+			// singletonsCurrentlyInCreation 添加失败 抛出异常
 			throw new BeanCurrentlyInCreationException(beanName);
 		}
 	}
@@ -346,6 +347,7 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
 	 */
 	protected void afterSingletonCreation(String beanName) {
 		if (!this.inCreationCheckExclusions.contains(beanName) && !this.singletonsCurrentlyInCreation.remove(beanName)) {
+			// singletonsCurrentlyInCreation 移除
 			throw new IllegalStateException("Singleton '" + beanName + "' isn't currently in creation");
 		}
 	}
