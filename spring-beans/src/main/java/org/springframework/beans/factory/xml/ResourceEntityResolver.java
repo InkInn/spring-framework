@@ -74,10 +74,11 @@ public class ResourceEntityResolver extends DelegatingEntityResolver {
 	@Nullable
 	public InputSource resolveEntity(@Nullable String publicId, @Nullable String systemId)
 			throws SAXException, IOException {
-
+		// 调用父类的方法，进行解析
 		InputSource source = super.resolveEntity(publicId, systemId);
-
+		// 解析失败 resourceLoader 进行解析
 		if (source == null && systemId != null) {
+			// 获得 resourcePath, 即 Resource 资源地址
 			String resourcePath = null;
 			try {
 				String decodedSystemId = URLDecoder.decode(systemId, "UTF-8");

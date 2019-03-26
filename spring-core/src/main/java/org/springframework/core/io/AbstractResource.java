@@ -16,6 +16,10 @@
 
 package org.springframework.core.io;
 
+import org.springframework.core.NestedIOException;
+import org.springframework.lang.Nullable;
+import org.springframework.util.ResourceUtils;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -25,10 +29,6 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
-
-import org.springframework.core.NestedIOException;
-import org.springframework.lang.Nullable;
-import org.springframework.util.ResourceUtils;
 
 /**
  * Convenience base class for {@link Resource} implementations,
@@ -52,11 +52,13 @@ public abstract class AbstractResource implements Resource {
 	public boolean exists() {
 		// Try file existence: can we find the file in the file system?
 		try {
+			// 基于File判断
 			return getFile().exists();
 		}
 		catch (IOException ex) {
 			// Fall back to stream existence: can we open the stream?
 			try {
+				// 基于InputStream 进行判断
 				getInputStream().close();
 				return true;
 			}
