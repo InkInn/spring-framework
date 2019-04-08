@@ -43,6 +43,7 @@ public interface ObjectFactory<T> {
 	 * of the object managed by this factory.
 	 * @return the resulting instance
 	 * @throws BeansException in case of creation errors
+	 * // TODO create Bean 创建 Bean（一）之主流程
 	 */
 	T getObject() throws BeansException;
 
